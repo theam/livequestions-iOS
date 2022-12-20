@@ -1,0 +1,6 @@
+mutation CreateTopic($title: String!, $timeToLive: Float!) {
+	CreateTopic(input: { 
+    title: $title,
+    timeToLive: $timeToLive
+  })
+}

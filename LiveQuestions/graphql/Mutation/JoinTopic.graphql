@@ -1,0 +1,5 @@
+mutation JoinTopic($id: ID!) {
+  JoinTopic(input: {
+    topicID: $id
+  })
+}

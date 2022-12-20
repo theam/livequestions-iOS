@@ -1,0 +1,12 @@
+query GetTopic($id: ID!) {
+ TopicReadModel(id: $id) {
+    id
+    title
+    createdAt
+    expiredAt
+    status
+    hostID
+    questionsCount
+    participantIDs
+  }
+}

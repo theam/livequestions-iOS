@@ -1,0 +1,7 @@
+mutation CreateQuestion($topicId: ID!, $question: String!, $isAnonymous: Boolean!) {
+  CreateQuestion(input: {
+    topicID: $topicId,
+    question: $question,
+    isAnonymous: $isAnonymous
+  })
+}

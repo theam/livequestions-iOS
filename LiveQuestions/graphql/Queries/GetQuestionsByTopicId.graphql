@@ -1,0 +1,20 @@
+query GetQuestionsByTopicId($topicId: ID!, $cursor: JSON) {
+  ListQuestionReadModels(
+    filter: {
+      topicID: { eq: $topicId }
+    },
+    afterCursor: $cursor
+  ) {
+    items {
+      id
+      text
+      status
+      creatorID
+      isAnonymous
+      createdAt
+      likes
+    }
+    count
+    cursor
+  }
+}

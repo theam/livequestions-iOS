@@ -1,0 +1,43 @@
+{
+  "schemaName" : "BoosterSchema",
+  "schemaDownloadConfiguration": {
+        "downloadMethod": {
+            "introspection": {
+                "endpointURL": "https://<TODO: ADD YOUR DEV OR PROD URL>.execute-api.eu-west-1.amazonaws.com/dev/graphql",
+                "httpMethod": {
+                    "POST": {}
+                },
+                "includeDeprecatedInputValues": false,
+                "outputFormat": "SDL"
+            }
+        },
+        "downloadTimeout": 60,
+        "headers": [],
+        "outputPath": "./graphql/schema.graphqls"
+  },
+  "input" : {
+    "operationSearchPaths" : [
+      "**/*.graphql"
+    ],
+    "schemaSearchPaths" : [
+      "**/*.graphqls"
+    ]
+  },
+  "output" : {
+    "testMocks" : {
+      "none" : {
+      }
+    },
+    "schemaTypes" : {
+        "moduleType": {
+            "embeddedInTarget": {
+                "name": "Questionably"
+            }
+        },
+        "path" : "./graphql/Schema"
+      },
+    "operations": {
+        "inSchemaModule": {}
+    }
+  }
+}

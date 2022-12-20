@@ -1,0 +1,9 @@
+subscription UserSubscription($id: ID!) {
+  UserReadModel(id: $id) {
+    id
+    displayName
+	username
+    blockedUserIDs
+    blockedQuestionIDs
+  }
+}

@@ -1,0 +1,5 @@
+mutation BlockQuestion($questionId: ID!) {
+  BlockQuestion(input: { 
+    questionID: $questionId
+  })
+}

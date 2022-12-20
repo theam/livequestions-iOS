@@ -1,0 +1,9 @@
+query GetUser($id: ID!) {
+  UserReadModel(id: $id) {
+    id
+    displayName
+	username
+    blockedUserIDs
+    blockedQuestionIDs
+  }
+}

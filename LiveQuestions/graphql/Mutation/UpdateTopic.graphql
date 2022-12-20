@@ -1,0 +1,6 @@
+mutation UpdateTopic($id: ID!, $title: String!) {
+	UpdateTopic(input: { 
+    topicID: $id,
+    title: $title 
+  })
+}

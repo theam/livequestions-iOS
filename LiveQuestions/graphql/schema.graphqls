@@ -1,0 +1,484 @@
+"""
+A directive used by the Apollo iOS client to annotate operations or fragments that should be used exclusively for generating local cache mutations instead of as standard operations.
+"""
+directive @apollo_client_ios_localCacheMutation on QUERY | MUTATION | SUBSCRIPTION | FRAGMENT_DEFINITION
+
+type Query {
+  UserReadModel(id: ID!): UserReadModel
+  TopicReadModel(id: ID!): TopicReadModel
+  QuestionReadModel(id: ID!): QuestionReadModel
+  OpenTopicReadModel(id: ID!): OpenTopicReadModel
+  UserReadModels(filter: UserReadModelFilter): [UserReadModel!]! @deprecated(reason: "Method is deprecated. Use List* methods")
+  TopicReadModels(filter: TopicReadModelFilter): [TopicReadModel!]! @deprecated(reason: "Method is deprecated. Use List* methods")
+  QuestionReadModels(filter: QuestionReadModelFilter): [QuestionReadModel!]! @deprecated(reason: "Method is deprecated. Use List* methods")
+  OpenTopicReadModels(filter: OpenTopicReadModelFilter): [OpenTopicReadModel!]! @deprecated(reason: "Method is deprecated. Use List* methods")
+  ListUserReadModels(filter: ListUserReadModelFilter, limit: Int, sortBy: UserReadModelSortBy, afterCursor: JSON): UserReadModelConnection!
+  ListTopicReadModels(filter: ListTopicReadModelFilter, limit: Int, sortBy: TopicReadModelSortBy, afterCursor: JSON): TopicReadModelConnection!
+  ListQuestionReadModels(filter: ListQuestionReadModelFilter, limit: Int, sortBy: QuestionReadModelSortBy, afterCursor: JSON): QuestionReadModelConnection!
+  ListOpenTopicReadModels(filter: ListOpenTopicReadModelFilter, limit: Int, sortBy: OpenTopicReadModelSortBy, afterCursor: JSON): OpenTopicReadModelConnection!
+  eventsByEntity(entity: EntityType!, entityID: ID, from: String, to: String, limit: Int): [EventQueryResponse]
+  eventsByType(type: EventType!, from: String, to: String, limit: Int): [EventQueryResponse]
+}
+
+type UserReadModel {
+  id: ID!
+  displayName: String!
+  username: String!
+  blockedUserIDs: [ID!]!
+  blockedQuestionIDs: [ID!]!
+}
+
+type TopicReadModel {
+  id: ID!
+  title: String!
+  createdAt: Float!
+  updatedAt: Float!
+  expiredAt: Float!
+  status: TopicStatus!
+  hostID: ID!
+  questionsCount: Float!
+  participantIDs: [ID!]!
+}
+
+enum TopicStatus {
+  Open
+  Closed
+  Deleted
+}
+
+type QuestionReadModel {
+  id: ID!
+  topicID: ID!
+  text: String!
+  status: QuestionStatus!
+  creatorID: ID!
+  isAnonymous: Boolean!
+  createdAt: Float!
+  updatedAt: Float!
+  likes: [ID!]!
+}
+
+enum QuestionStatus {
+  Answered
+  Unanswered
+  Deleted
+}
+
+type OpenTopicReadModel {
+  id: ID!
+  expiredAt: Float!
+}
+
+input UserReadModelFilter {
+  id: UUIDPropertyFilter
+  displayName: StringPropertyFilter
+  username: StringPropertyFilter
+  blockedUserIDs: UUIDArrayPropertyFilter
+  blockedQuestionIDs: UUIDArrayPropertyFilter
+  and: [UserReadModelFilter]
+  or: [UserReadModelFilter]
+  not: UserReadModelFilter
+  isDefined: Boolean
+}
+
+input UUIDPropertyFilter {
+  eq: ID
+  ne: ID
+  in: [ID]
+  isDefined: Boolean
+}
+
+input StringPropertyFilter {
+  eq: String
+  ne: String
+  lte: String
+  lt: String
+  gte: String
+  gt: String
+  in: [String]
+  beginsWith: String
+  contains: String
+  isDefined: Boolean
+}
+
+input UUIDArrayPropertyFilter {
+  includes: ID
+  isDefined: Boolean
+}
+
+input TopicReadModelFilter {
+  id: UUIDPropertyFilter
+  title: StringPropertyFilter
+  createdAt: NumberPropertyFilter
+  updatedAt: NumberPropertyFilter
+  expiredAt: NumberPropertyFilter
+  status: TopicStatusPropertyFilter
+  hostID: UUIDPropertyFilter
+  questionsCount: NumberPropertyFilter
+  participantIDs: UUIDArrayPropertyFilter
+  and: [TopicReadModelFilter]
+  or: [TopicReadModelFilter]
+  not: TopicReadModelFilter
+  isDefined: Boolean
+}
+
+input NumberPropertyFilter {
+  eq: Float
+  ne: Float
+  lte: Float
+  lt: Float
+  gte: Float
+  gt: Float
+  in: [Float]
+  isDefined: Boolean
+}
+
+input TopicStatusPropertyFilter {
+  eq: TopicStatus!
+  ne: TopicStatus!
+  isDefined: Boolean
+}
+
+input QuestionReadModelFilter {
+  id: UUIDPropertyFilter
+  topicID: UUIDPropertyFilter
+  text: StringPropertyFilter
+  status: QuestionStatusPropertyFilter
+  creatorID: UUIDPropertyFilter
+  isAnonymous: BooleanPropertyFilter
+  createdAt: NumberPropertyFilter
+  updatedAt: NumberPropertyFilter
+  likes: UUIDArrayPropertyFilter
+  and: [QuestionReadModelFilter]
+  or: [QuestionReadModelFilter]
+  not: QuestionReadModelFilter
+  isDefined: Boolean
+}
+
+input QuestionStatusPropertyFilter {
+  eq: QuestionStatus!
+  ne: QuestionStatus!
+  isDefined: Boolean
+}
+
+input BooleanPropertyFilter {
+  eq: Boolean
+  ne: Boolean
+  isDefined: Boolean
+}
+
+input OpenTopicReadModelFilter {
+  id: UUIDPropertyFilter
+  expiredAt: NumberPropertyFilter
+  and: [OpenTopicReadModelFilter]
+  or: [OpenTopicReadModelFilter]
+  not: OpenTopicReadModelFilter
+  isDefined: Boolean
+}
+
+type UserReadModelConnection {
+  items: [UserReadModel!]!
+  count: Int!
+  cursor: JSON
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+input ListUserReadModelFilter {
+  id: UUIDPropertyFilter
+  displayName: StringPropertyFilter
+  username: StringPropertyFilter
+  blockedUserIDs: UUIDArrayPropertyFilter
+  blockedQuestionIDs: UUIDArrayPropertyFilter
+  and: [ListUserReadModelFilter]
+  or: [ListUserReadModelFilter]
+  not: ListUserReadModelFilter
+}
+
+input UserReadModelSortBy {
+  id: orderProperty
+  displayName: orderProperty
+  username: orderProperty
+  blockedUserIDs: orderProperty
+  blockedQuestionIDs: orderProperty
+}
+
+enum orderProperty {
+  ASC
+  DESC
+}
+
+type TopicReadModelConnection {
+  items: [TopicReadModel!]!
+  count: Int!
+  cursor: JSON
+}
+
+input ListTopicReadModelFilter {
+  id: UUIDPropertyFilter
+  title: StringPropertyFilter
+  createdAt: NumberPropertyFilter
+  updatedAt: NumberPropertyFilter
+  expiredAt: NumberPropertyFilter
+  status: TopicStatusPropertyFilter
+  hostID: UUIDPropertyFilter
+  questionsCount: NumberPropertyFilter
+  participantIDs: UUIDArrayPropertyFilter
+  and: [ListTopicReadModelFilter]
+  or: [ListTopicReadModelFilter]
+  not: ListTopicReadModelFilter
+}
+
+input TopicReadModelSortBy {
+  id: orderProperty
+  title: orderProperty
+  createdAt: orderProperty
+  updatedAt: orderProperty
+  expiredAt: orderProperty
+  status: orderProperty
+  hostID: orderProperty
+  questionsCount: orderProperty
+  participantIDs: orderProperty
+}
+
+type QuestionReadModelConnection {
+  items: [QuestionReadModel!]!
+  count: Int!
+  cursor: JSON
+}
+
+input ListQuestionReadModelFilter {
+  id: UUIDPropertyFilter
+  topicID: UUIDPropertyFilter
+  text: StringPropertyFilter
+  status: QuestionStatusPropertyFilter
+  creatorID: UUIDPropertyFilter
+  isAnonymous: BooleanPropertyFilter
+  createdAt: NumberPropertyFilter
+  updatedAt: NumberPropertyFilter
+  likes: UUIDArrayPropertyFilter
+  and: [ListQuestionReadModelFilter]
+  or: [ListQuestionReadModelFilter]
+  not: ListQuestionReadModelFilter
+}
+
+input QuestionReadModelSortBy {
+  id: orderProperty
+  topicID: orderProperty
+  text: orderProperty
+  status: orderProperty
+  creatorID: orderProperty
+  isAnonymous: orderProperty
+  createdAt: orderProperty
+  updatedAt: orderProperty
+  likes: orderProperty
+}
+
+type OpenTopicReadModelConnection {
+  items: [OpenTopicReadModel!]!
+  count: Int!
+  cursor: JSON
+}
+
+input ListOpenTopicReadModelFilter {
+  id: UUIDPropertyFilter
+  expiredAt: NumberPropertyFilter
+  and: [ListOpenTopicReadModelFilter]
+  or: [ListOpenTopicReadModelFilter]
+  not: ListOpenTopicReadModelFilter
+}
+
+input OpenTopicReadModelSortBy {
+  id: orderProperty
+  expiredAt: orderProperty
+}
+
+type EventQueryResponse {
+  type: String!
+  entity: String!
+  entityID: ID!
+  requestID: ID!
+  user: User
+  createdAt: String!
+  value: JSON!
+}
+
+type User {
+  id: String
+  username: String!
+  roles: [String!]
+}
+
+enum EntityType {
+  Question
+  Topic
+  User
+  BoosterDataMigrationEntity
+}
+
+enum EventType {
+  QuestionCreated
+  QuestionReacted
+  QuestionStatusUpdated
+  QuestionUpdated
+  TopicCreated
+  TopicStatusUpdated
+  TopicQuestionCreated
+  TopicQuestionDeleted
+  TopicJoined
+  TopicUpdated
+  UserCreated
+  UserUpdated
+  UserDeleted
+  QuestionBlocked
+  UserUnblocked
+  UserBlocked
+  BoosterDataMigrationStarted
+  BoosterDataMigrationFinished
+}
+
+type Mutation {
+  BlockQuestion(input: BlockQuestionInput!): Boolean!
+  BlockUser(input: BlockUserInput!): Boolean!
+  CreateQuestion(input: CreateQuestionInput!): ID!
+  CreateTopic(input: CreateTopicInput!): ID!
+  CreateUser(input: CreateUserInput!): String!
+  DeleteUser: Boolean!
+  JoinTopic(input: JoinTopicInput!): Boolean!
+  ReactToQuestion(input: ReactToQuestionInput!): Boolean!
+  UnblockUser(input: UnblockUserInput!): Boolean!
+  UpdateQuestionStatus(input: UpdateQuestionStatusInput!): Boolean!
+  UpdateQuestion(input: UpdateQuestionInput!): Boolean!
+  UpdateTopicStatus(input: UpdateTopicStatusInput!): Boolean!
+  UpdateTopic(input: UpdateTopicInput!): Boolean!
+  UpdateUser(input: UpdateUserInput!): Boolean!
+}
+
+input BlockQuestionInput {
+  questionID: ID!
+}
+
+input BlockUserInput {
+  userID: ID!
+}
+
+input CreateQuestionInput {
+  topicID: ID!
+  question: String!
+  isAnonymous: Boolean!
+}
+
+input CreateTopicInput {
+  title: String!
+  timeToLive: Float!
+}
+
+input CreateUserInput {
+  displayName: String!
+  username: String!
+  email: String!
+}
+
+input JoinTopicInput {
+  topicID: ID!
+}
+
+input ReactToQuestionInput {
+  questionID: ID!
+  like: Boolean!
+}
+
+input UnblockUserInput {
+  userID: ID!
+}
+
+input UpdateQuestionStatusInput {
+  questionID: ID!
+  status: QuestionStatus!
+}
+
+input UpdateQuestionInput {
+  questionID: ID!
+  question: String!
+}
+
+input UpdateTopicStatusInput {
+  topicID: ID!
+  status: TopicStatus!
+}
+
+input UpdateTopicInput {
+  topicID: ID!
+  title: String!
+}
+
+input UpdateUserInput {
+  displayName: String!
+}
+
+type Subscription {
+  UserReadModel(id: ID!): UserReadModel
+  TopicReadModel(id: ID!): TopicReadModel
+  QuestionReadModel(id: ID!): QuestionReadModel
+  OpenTopicReadModel(id: ID!): OpenTopicReadModel
+  UserReadModels(filter: UserReadModelSubscriptionFilter): UserReadModel
+  TopicReadModels(filter: TopicReadModelSubscriptionFilter): TopicReadModel
+  QuestionReadModels(filter: QuestionReadModelSubscriptionFilter): QuestionReadModel
+  OpenTopicReadModels(filter: OpenTopicReadModelSubscriptionFilter): OpenTopicReadModel
+}
+
+input UserReadModelSubscriptionFilter {
+  id: UUIDPropertyFilter
+  displayName: StringPropertyFilter
+  username: StringPropertyFilter
+  blockedUserIDs: UUIDArrayPropertyFilter
+  blockedQuestionIDs: UUIDArrayPropertyFilter
+  and: [UserReadModelSubscriptionFilter]
+  or: [UserReadModelSubscriptionFilter]
+  not: UserReadModelSubscriptionFilter
+  isDefined: Boolean
+}
+
+input TopicReadModelSubscriptionFilter {
+  id: UUIDPropertyFilter
+  title: StringPropertyFilter
+  createdAt: NumberPropertyFilter
+  updatedAt: NumberPropertyFilter
+  expiredAt: NumberPropertyFilter
+  status: TopicStatusPropertyFilter
+  hostID: UUIDPropertyFilter
+  questionsCount: NumberPropertyFilter
+  participantIDs: UUIDArrayPropertyFilter
+  and: [TopicReadModelSubscriptionFilter]
+  or: [TopicReadModelSubscriptionFilter]
+  not: TopicReadModelSubscriptionFilter
+  isDefined: Boolean
+}
+
+input QuestionReadModelSubscriptionFilter {
+  id: UUIDPropertyFilter
+  topicID: UUIDPropertyFilter
+  text: StringPropertyFilter
+  status: QuestionStatusPropertyFilter
+  creatorID: UUIDPropertyFilter
+  isAnonymous: BooleanPropertyFilter
+  createdAt: NumberPropertyFilter
+  updatedAt: NumberPropertyFilter
+  likes: UUIDArrayPropertyFilter
+  and: [QuestionReadModelSubscriptionFilter]
+  or: [QuestionReadModelSubscriptionFilter]
+  not: QuestionReadModelSubscriptionFilter
+  isDefined: Boolean
+}
+
+input OpenTopicReadModelSubscriptionFilter {
+  id: UUIDPropertyFilter
+  expiredAt: NumberPropertyFilter
+  and: [OpenTopicReadModelSubscriptionFilter]
+  or: [OpenTopicReadModelSubscriptionFilter]
+  not: OpenTopicReadModelSubscriptionFilter
+  isDefined: Boolean
+}

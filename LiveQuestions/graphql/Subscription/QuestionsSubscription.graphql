@@ -1,0 +1,11 @@
+subscription QuestionsSubscription($topicId: ID!) {
+  QuestionReadModels(filter: { topicID : {eq: $topicId}}) {
+    id
+    text
+    status
+    creatorID
+    isAnonymous
+    createdAt
+    likes
+  }
+}

@@ -1,0 +1,16 @@
+query GetUsers($ids: [ID!]!, $cursor: JSON) {
+  ListUserReadModels(
+    filter: {  
+      id: { in: $ids }
+    },
+    afterCursor: $cursor
+  ) {
+     items {
+      id
+      displayName
+	  username
+    }
+    count
+    cursor
+  }
+}

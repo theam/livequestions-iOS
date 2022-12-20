@@ -1,0 +1,6 @@
+mutation UpdateQuestionStatus($id: ID!, $status: QuestionStatus!) {
+  UpdateQuestionStatus(input: { 
+    questionID: $id,
+    status: $status 
+  })
+}

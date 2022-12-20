@@ -1,0 +1,25 @@
+## User settings
+xcuserdata/
+
+## Xcode 8 and earlier
+*.xcscmblueprint
+*.xccheckout
+
+### Xcode Patch ###
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+**/xcshareddata/WorkspaceSettings.xcsettings
+
+.DS_Store
+/Questionably/Questionably/Resources/Auth0.plist
+/Questionably/.idea/xcode.xml
+/Questionably/.idea/vcs.xml
+/Questionably/.idea/Questionably.iml
+/Questionably/.idea/modules.xml
+/Questionably/.idea/misc.xml
+/Questionably/.idea/.gitignore
+/Questionably/package-lock.json

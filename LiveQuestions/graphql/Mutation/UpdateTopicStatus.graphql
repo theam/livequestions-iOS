@@ -1,0 +1,6 @@
+mutation UpdateTopicStatus($topicId: ID!, $status: TopicStatus!) {
+  UpdateTopicStatus(input: {
+    topicID: $topicId,
+    status: $status 
+  })
+}

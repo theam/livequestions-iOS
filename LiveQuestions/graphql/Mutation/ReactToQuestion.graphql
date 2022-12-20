@@ -1,0 +1,6 @@
+mutation ReactToQuestion($questionId: ID!, $like: Boolean!) {
+  ReactToQuestion(input: { 
+    questionID: $questionId,
+    like: $like 
+  })
+}

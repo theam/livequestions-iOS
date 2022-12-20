@@ -1,0 +1,14 @@
+subscription MyTopicsSubscription($userId: ID!) {
+  TopicReadModels(
+    filter: { hostID: {eq: $userId} }
+  ) {
+    id
+    title
+    createdAt
+    expiredAt
+    status
+    hostID
+    questionsCount
+    participantIDs
+  }
+}

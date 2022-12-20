@@ -1,0 +1,5 @@
+mutation UnblockUser($userId: ID!) {
+  UnblockUser(input: { 
+    userID: $userId
+  })
+}

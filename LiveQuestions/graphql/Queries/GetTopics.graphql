@@ -1,0 +1,24 @@
+query GetTopics($userId: ID!, $cursor: JSON) {
+  ListTopicReadModels(
+        filter: {
+            or: [
+                { hostID: {eq: $userId} },
+                { participantIDs: {includes: $userId} }
+            ]
+        },
+        afterCursor: $cursor
+  ) {
+    items {
+        id
+        title
+        createdAt
+        expiredAt
+        status
+        hostID
+        questionsCount
+        participantIDs
+    }
+    count
+    cursor
+  }
+}

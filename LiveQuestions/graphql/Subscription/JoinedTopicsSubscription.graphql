@@ -1,0 +1,14 @@
+subscription JoinedTopicsSubscription($userId: ID!) {
+  TopicReadModels(
+	filter: { participantIDs: {includes: $userId} }
+  ) {
+	id
+	title
+	createdAt
+	expiredAt
+	status
+	hostID
+	questionsCount
+	participantIDs
+  }
+}
