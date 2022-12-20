@@ -31,7 +31,7 @@
     "schemaTypes" : {
         "moduleType": {
             "embeddedInTarget": {
-                "name": "Questionably"
+                "name": "LiveQuestions"
             }
         },
         "path" : "./graphql/Schema"
