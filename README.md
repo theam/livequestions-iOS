@@ -18,9 +18,9 @@ You can download the application from an iPhone or iPad and check for yourself h
 Here are some steps you can follow to download and open the project.
 
 ```
-$ git clone https://github.com/theam/questionably-iOS.git
-$ cd questionably-iOS/Questionably 
-$ open Questionably.xcworkspace
+$ git clone https://github.com/theam/livequestions-iOS.git
+$ cd livequestions-iOS/LiveQuestions
+$ open LiveQuestions.xcodeproj
 ```
 
 This project uses Swift Package Manager for it's dependencies, so after you open the project all dependencies will be automatically downloaded.
