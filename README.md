@@ -5,6 +5,10 @@
 Live Questions is an iOS app that demonstrates the ease of using Booster as a backend solution.
 
 
+## Articles
+[From iOS Dev to full-stack in no time with Booster 🚀](https://medium.com/@juanSagasti/f2eda6463c40)
+
+
 ## Features
 
 Live Questions is an excellent companion tool for live events, keynotes, and Q&A sessions!
@@ -40,16 +44,16 @@ $ cd livequestions-iOS/LiveQuestions
 $ open LiveQuestions.xcodeproj
 ```
 
-This project uses Swift Package Manager for it's dependencies, so after you open the project all dependencies will be automatically downloaded.
+Note: This project uses Swift Package Manager for its dependencies, so they will be automatically downloaded when you open the project in Xcode.
 
 **[IMPORTANT]**
-If you want to be able to run this application on a simulator or device from Xcode, you will need to sign up on [Auth0](https://auth0.com) and create your own application to authenticate users with your client id and domain. You should only need to do the steps 1 & 4 from this [tutorial](https://auth0.com/docs/quickstart/native/ios-swift/interactive).
+To be able to run the application on a simulator or device from Xcode, you will need to sign up for an account on [Auth0](https://auth0.com) and create your own application to authenticate users. Follow steps 1 and 4 of the Auth0 tutorial to set up your own authentication for the project, see [here](https://auth0.com/docs/quickstart/native/ios-swift/interactive). For more detailed instructions on how to use Auth0 with your iOS application, you can also check out our [tutorial](https://medium.com/@juanSagasti/f2eda6463c40).
+
 
 
 ## Architecture
 
-For this application we created the UI with **SwiftUI**, user authentication and authorization with **Auth0**, and for our backend we are using **Booster**. The comunication between client and server is done through GraphQL, which means we will perform queries, mutations and have subscriptions to keep our app in sync with the server.
-
+In this application, we utilized **SwiftUI** to create the user interface, **Auth0** for user authentication and authorization, and **Booster** as the backend solution. We use GraphQL for communication between the client and server, allowing us to perform queries, mutations, and establish subscriptions to keep the app synchronized with the server.
 
 <img width="800" alt="Live Questions Diagram" src="https://user-images.githubusercontent.com/738853/205601819-3a132fed-1ed0-4883-adb0-51d6dd05a36d.png">
 
