@@ -5,9 +5,6 @@
 Live Questions is an iOS app that demonstrates the ease of using Booster as a backend solution.
 
 
-## Articles
-[From iOS Dev to full-stack in no time with Booster 🚀](https://medium.com/@juanSagasti/f2eda6463c40)
-
 
 ## Features
 
@@ -57,6 +54,10 @@ In this application, we utilized **SwiftUI** to create the user interface, **Aut
 
 <img width="800" alt="Live Questions Diagram" src="https://user-images.githubusercontent.com/738853/205601819-3a132fed-1ed0-4883-adb0-51d6dd05a36d.png">
 
+
+## Articles
+[From iOS Dev to full-stack in no time with Booster 🚀](https://medium.com/@juanSagasti/f2eda6463c40)
+[Scalable Low-Code backends with Booster](https://medium.com/@juanSagasti/scalable-low-code-backends-with-booster-a32b9386dd27)
 
 ## License
 
