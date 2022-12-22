@@ -5,7 +5,7 @@
 Live Questions is an iOS app that showcases the benefits of using Booster as a backend solution. You can download the app on your iPhone or iPad to see it in action and experience firsthand the power of [**Booster**](http://docs.booster.cloud).
 
 
-[![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://user-images.githubusercontent.com/738853/209131093-b58894d9-4ef9-47aa-be76-84e4a9abb86f.svg)](https://apps.apple.com/en/app/live-questions-ask-anything/id1659446314)
+[![Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917](https://user-images.githubusercontent.com/738853/209131093-b58894d9-4ef9-47aa-be76-84e4a9abb86f.svg)](https://apps.apple.com/app/id1659446314)
 
 
 
