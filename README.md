@@ -4,6 +4,10 @@
 
 Live Questions is an iOS app that demonstrates the ease of using Booster as a backend solution.
 
+You can download the app on your iPhone or iPad to see the app in action and experience the power of using [**Booster**](http://docs.booster.cloud) as a backend solution.
+
+![https://apps.apple.com/en/app/live-questions-ask-anything/id1659446314](https://user-images.githubusercontent.com/738853/205076607-b4e92c7c-3164-44d6-9909-13f01bc747dc.svg)
+
 
 
 ## Features
@@ -24,10 +28,6 @@ As a participant in a live event, you can:
 - Like others' questions so the host can easily prioritize the most liked ones during the session.
 - Edit or delete your question.
 
-
-You can download the app on your iPhone or iPad to see the app in action and experience the power of using [**Booster**](http://docs.booster.cloud) as a backend solution.
-
-![https://apps.apple.com/en/app/live-questions-ask-anything/id1659446314](https://user-images.githubusercontent.com/738853/205076607-b4e92c7c-3164-44d6-9909-13f01bc747dc.svg)
 
 
 
@@ -57,6 +57,7 @@ In this application, we utilized **SwiftUI** to create the user interface, **Aut
 
 ## Articles
 [From iOS Dev to full-stack in no time with Booster 🚀](https://medium.com/@juanSagasti/f2eda6463c40)
+
 [Scalable Low-Code backends with Booster](https://medium.com/@juanSagasti/scalable-low-code-backends-with-booster-a32b9386dd27)
 
 ## License
