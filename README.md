@@ -2,14 +2,31 @@
 
 ![256 png](https://user-images.githubusercontent.com/738853/205069300-7551a459-ed94-4c5e-80f1-36d3cb5b3066.jpeg)
 
-Live Questions is an universal iOS app that shows how easy it is to use [**Booster framework**](http://docs.booster.cloud) as the Backend solution.
+Live Questions is an iOS app that demonstrates the ease of using Booster as a backend solution.
 
-This application allows you to ask questions about a specific topic that a host created. When you create a topic, you can share it with your friends and they can ask or like others questions.
 
-You can download the application from an iPhone or iPad and check for yourself how the app works.
+## Features
 
-![https://apps.apple.com/us/app/pickbit-record-audio-share/id1593890437](https://user-images.githubusercontent.com/738853/205076607-b4e92c7c-3164-44d6-9909-13f01bc747dc.svg)
+Live Questions is an excellent companion tool for live events, keynotes, and Q&A sessions!
 
+As host of a live event, you can:
+- Create a topic to collect all the questions from the public in an organized way. You will see the question list grow in real time!
+- Share the topic link or show the QR code so only the event participants can join the topic. 
+- Mark questions as answered in real-time when you answer them in real life.
+- Sort the question list to see the most liked or recent ones at the top.
+- Close the topic when the event is finished or let it expire automatically.
+- Edit or delete your topics.
+
+As a participant in a live event, you can:
+- Join a topic with a link or a QR code and start adding your questions to the topic!
+- Ask anonymously if you prefer.
+- Like others' questions so the host can easily prioritize the most liked ones during the session.
+- Edit or delete your question.
+
+
+You can download the app on your iPhone or iPad to see the app in action and experience the power of using [**Booster**](http://docs.booster.cloud) as a backend solution.
+
+![https://apps.apple.com/en/app/live-questions-ask-anything/id1659446314](https://user-images.githubusercontent.com/738853/205076607-b4e92c7c-3164-44d6-9909-13f01bc747dc.svg)
 
 
 
