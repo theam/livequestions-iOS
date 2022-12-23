@@ -55,8 +55,7 @@ In this application, we utilized **SwiftUI** to create the user interface, **Aut
 
 ## Booster Backend Repository
 
-This GitHub repository contains the Booster Backend implementation for the iOS app Live Questions. [Live Questions Backend](https://github.com/theam/livequestions-booster)
-
+[Live Questions Backend](https://github.com/theam/livequestions-booster)
 
 
 ## Articles
