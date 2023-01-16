@@ -39,6 +39,7 @@ final class AuthService: ObservableObject {
     @MainActor func signIn() async throws {
         let credentials = try await Auth0
             .webAuth()
+            .scope("openid profile email offline_access")
             .audience(Configuration.authAudience)
             .start()
 
