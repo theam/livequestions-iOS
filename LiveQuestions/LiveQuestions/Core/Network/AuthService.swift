@@ -37,6 +37,11 @@ final class AuthService: ObservableObject {
 
     /// Authenticate user through sign in
     @MainActor func signIn() async throws {
+        /// For Auth0 to auto-renew an expired access token, it needs to receive a refresh token.
+        /// This is made by setting the `offline_access` scope.
+        /// https://auth0.com/docs/libraries/auth0-swift/auth0-swift-save-and-renew-tokens
+        /// https://auth0.com/docs/get-started/apis/scopes/openid-connect-scopes
+        
         let credentials = try await Auth0
             .webAuth()
             .scope("openid profile email offline_access")
