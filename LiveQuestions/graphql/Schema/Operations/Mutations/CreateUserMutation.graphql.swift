@@ -8,13 +8,13 @@ public extension BoosterSchema {
     public static let operationName: String = "CreateUser"
     public static let document: ApolloAPI.DocumentType = .notPersisted(
       definition: .init(
-        """
+        #"""
         mutation CreateUser($username: String!, $displayName: String!, $email: String!) {
           CreateUser(
             input: {displayName: $displayName, username: $username, email: $email}
           )
         }
-        """
+        """#
       ))
 
     public var username: String
@@ -41,8 +41,8 @@ public extension BoosterSchema {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
-      public static var __parentType: ParentType { BoosterSchema.Objects.Mutation }
-      public static var __selections: [Selection] { [
+      public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.Mutation }
+      public static var __selections: [ApolloAPI.Selection] { [
         .field("CreateUser", String.self, arguments: ["input": [
           "displayName": .variable("displayName"),
           "username": .variable("username"),

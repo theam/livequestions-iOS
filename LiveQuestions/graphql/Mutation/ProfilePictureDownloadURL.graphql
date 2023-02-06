@@ -1,0 +1,3 @@
+mutation ProfilePictureDownloadURL {
+    ProfilePictureDownloadURL
+}

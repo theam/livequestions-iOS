@@ -8,7 +8,7 @@ public extension BoosterSchema {
     public static let operationName: String = "GetQuestionsByTopicId"
     public static let document: ApolloAPI.DocumentType = .notPersisted(
       definition: .init(
-        """
+        #"""
         query GetQuestionsByTopicId($topicId: ID!, $cursor: JSON) {
           ListQuestionReadModels(filter: {topicID: {eq: $topicId}}, afterCursor: $cursor) {
             __typename
@@ -26,7 +26,7 @@ public extension BoosterSchema {
             cursor
           }
         }
-        """
+        """#
       ))
 
     public var topicId: ID
@@ -49,8 +49,8 @@ public extension BoosterSchema {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
-      public static var __parentType: ParentType { BoosterSchema.Objects.Query }
-      public static var __selections: [Selection] { [
+      public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.Query }
+      public static var __selections: [ApolloAPI.Selection] { [
         .field("ListQuestionReadModels", ListQuestionReadModels.self, arguments: [
           "filter": ["topicID": ["eq": .variable("topicId")]],
           "afterCursor": .variable("cursor")
@@ -66,16 +66,16 @@ public extension BoosterSchema {
         public let __data: DataDict
         public init(data: DataDict) { __data = data }
 
-        public static var __parentType: ParentType { BoosterSchema.Objects.QuestionReadModelConnection }
-        public static var __selections: [Selection] { [
+        public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.QuestionReadModelConnection }
+        public static var __selections: [ApolloAPI.Selection] { [
           .field("items", [Item].self),
           .field("count", Int.self),
-          .field("cursor", JSON?.self),
+          .field("cursor", BoosterSchema.JSON?.self),
         ] }
 
         public var items: [Item] { __data["items"] }
         public var count: Int { __data["count"] }
-        public var cursor: JSON? { __data["cursor"] }
+        public var cursor: BoosterSchema.JSON? { __data["cursor"] }
 
         /// ListQuestionReadModels.Item
         ///
@@ -84,24 +84,24 @@ public extension BoosterSchema {
           public let __data: DataDict
           public init(data: DataDict) { __data = data }
 
-          public static var __parentType: ParentType { BoosterSchema.Objects.QuestionReadModel }
-          public static var __selections: [Selection] { [
-            .field("id", ID.self),
+          public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.QuestionReadModel }
+          public static var __selections: [ApolloAPI.Selection] { [
+            .field("id", BoosterSchema.ID.self),
             .field("text", String.self),
-            .field("status", GraphQLEnum<QuestionStatus>.self),
-            .field("creatorID", ID.self),
+            .field("status", GraphQLEnum<BoosterSchema.QuestionStatus>.self),
+            .field("creatorID", BoosterSchema.ID.self),
             .field("isAnonymous", Bool.self),
             .field("createdAt", Double.self),
-            .field("likes", [ID].self),
+            .field("likes", [BoosterSchema.ID].self),
           ] }
 
-          public var id: ID { __data["id"] }
+          public var id: BoosterSchema.ID { __data["id"] }
           public var text: String { __data["text"] }
-          public var status: GraphQLEnum<QuestionStatus> { __data["status"] }
-          public var creatorID: ID { __data["creatorID"] }
+          public var status: GraphQLEnum<BoosterSchema.QuestionStatus> { __data["status"] }
+          public var creatorID: BoosterSchema.ID { __data["creatorID"] }
           public var isAnonymous: Bool { __data["isAnonymous"] }
           public var createdAt: Double { __data["createdAt"] }
-          public var likes: [ID] { __data["likes"] }
+          public var likes: [BoosterSchema.ID] { __data["likes"] }
         }
       }
     }

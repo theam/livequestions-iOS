@@ -8,7 +8,7 @@ public extension BoosterSchema {
     public static let operationName: String = "MyTopicsSubscription"
     public static let document: ApolloAPI.DocumentType = .notPersisted(
       definition: .init(
-        """
+        #"""
         subscription MyTopicsSubscription($userId: ID!) {
           TopicReadModels(filter: {hostID: {eq: $userId}}) {
             __typename
@@ -22,7 +22,7 @@ public extension BoosterSchema {
             participantIDs
           }
         }
-        """
+        """#
       ))
 
     public var userId: ID
@@ -37,8 +37,8 @@ public extension BoosterSchema {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
-      public static var __parentType: ParentType { BoosterSchema.Objects.Subscription }
-      public static var __selections: [Selection] { [
+      public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.Subscription }
+      public static var __selections: [ApolloAPI.Selection] { [
         .field("TopicReadModels", TopicReadModels?.self, arguments: ["filter": ["hostID": ["eq": .variable("userId")]]]),
       ] }
 
@@ -51,26 +51,26 @@ public extension BoosterSchema {
         public let __data: DataDict
         public init(data: DataDict) { __data = data }
 
-        public static var __parentType: ParentType { BoosterSchema.Objects.TopicReadModel }
-        public static var __selections: [Selection] { [
-          .field("id", ID.self),
+        public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.TopicReadModel }
+        public static var __selections: [ApolloAPI.Selection] { [
+          .field("id", BoosterSchema.ID.self),
           .field("title", String.self),
           .field("createdAt", Double.self),
           .field("expiredAt", Double.self),
-          .field("status", GraphQLEnum<TopicStatus>.self),
-          .field("hostID", ID.self),
+          .field("status", GraphQLEnum<BoosterSchema.TopicStatus>.self),
+          .field("hostID", BoosterSchema.ID.self),
           .field("questionsCount", Double.self),
-          .field("participantIDs", [ID].self),
+          .field("participantIDs", [BoosterSchema.ID].self),
         ] }
 
-        public var id: ID { __data["id"] }
+        public var id: BoosterSchema.ID { __data["id"] }
         public var title: String { __data["title"] }
         public var createdAt: Double { __data["createdAt"] }
         public var expiredAt: Double { __data["expiredAt"] }
-        public var status: GraphQLEnum<TopicStatus> { __data["status"] }
-        public var hostID: ID { __data["hostID"] }
+        public var status: GraphQLEnum<BoosterSchema.TopicStatus> { __data["status"] }
+        public var hostID: BoosterSchema.ID { __data["hostID"] }
         public var questionsCount: Double { __data["questionsCount"] }
-        public var participantIDs: [ID] { __data["participantIDs"] }
+        public var participantIDs: [BoosterSchema.ID] { __data["participantIDs"] }
       }
     }
   }

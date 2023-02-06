@@ -316,6 +316,7 @@ enum EntityType {
   Question
   Topic
   User
+  UploadedFileEntity
   BoosterDataMigrationEntity
 }
 
@@ -336,6 +337,7 @@ enum EventType {
   QuestionBlocked
   UserUnblocked
   UserBlocked
+  UploadedFileEvent
   BoosterDataMigrationStarted
   BoosterDataMigrationFinished
 }
@@ -346,8 +348,12 @@ type Mutation {
   CreateQuestion(input: CreateQuestionInput!): ID!
   CreateTopic(input: CreateTopicInput!): ID!
   CreateUser(input: CreateUserInput!): String!
+  DeleteProfilePicture: Boolean!
   DeleteUser: Boolean!
+  FilesList: [ListItem!]!
   JoinTopic(input: JoinTopicInput!): Boolean!
+  ProfilePictureDownloadURL: String!
+  ProfilePictureUploadURL: PresignedPostResponse!
   ReactToQuestion(input: ReactToQuestionInput!): Boolean!
   UnblockUser(input: UnblockUserInput!): Boolean!
   UpdateQuestionStatus(input: UpdateQuestionStatusInput!): Boolean!
@@ -382,8 +388,19 @@ input CreateUserInput {
   email: String!
 }
 
+type ListItem {
+  name: String!
+  properties: JSON!
+  metadata: JSON
+}
+
 input JoinTopicInput {
   topicID: ID!
+}
+
+type PresignedPostResponse {
+  url: String!
+  fields: JSON!
 }
 
 input ReactToQuestionInput {

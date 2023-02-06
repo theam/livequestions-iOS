@@ -32,6 +32,8 @@ public extension BoosterSchema {
     public static func objectType(forTypename typename: String) -> Object? {
       switch typename {
       case "Mutation": return BoosterSchema.Objects.Mutation
+      case "ListItem": return BoosterSchema.Objects.ListItem
+      case "PresignedPostResponse": return BoosterSchema.Objects.PresignedPostResponse
       case "Query": return BoosterSchema.Objects.Query
       case "TopicReadModel": return BoosterSchema.Objects.TopicReadModel
       case "UserReadModelConnection": return BoosterSchema.Objects.UserReadModelConnection

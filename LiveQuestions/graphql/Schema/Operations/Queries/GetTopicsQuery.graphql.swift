@@ -8,7 +8,7 @@ public extension BoosterSchema {
     public static let operationName: String = "GetTopics"
     public static let document: ApolloAPI.DocumentType = .notPersisted(
       definition: .init(
-        """
+        #"""
         query GetTopics($userId: ID!, $cursor: JSON) {
           ListTopicReadModels(
             filter: {or: [{hostID: {eq: $userId}}, {participantIDs: {includes: $userId}}]}
@@ -30,7 +30,7 @@ public extension BoosterSchema {
             cursor
           }
         }
-        """
+        """#
       ))
 
     public var userId: ID
@@ -53,8 +53,8 @@ public extension BoosterSchema {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
-      public static var __parentType: ParentType { BoosterSchema.Objects.Query }
-      public static var __selections: [Selection] { [
+      public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.Query }
+      public static var __selections: [ApolloAPI.Selection] { [
         .field("ListTopicReadModels", ListTopicReadModels.self, arguments: [
           "filter": ["or": [["hostID": ["eq": .variable("userId")]], ["participantIDs": ["includes": .variable("userId")]]]],
           "afterCursor": .variable("cursor")
@@ -70,16 +70,16 @@ public extension BoosterSchema {
         public let __data: DataDict
         public init(data: DataDict) { __data = data }
 
-        public static var __parentType: ParentType { BoosterSchema.Objects.TopicReadModelConnection }
-        public static var __selections: [Selection] { [
+        public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.TopicReadModelConnection }
+        public static var __selections: [ApolloAPI.Selection] { [
           .field("items", [Item].self),
           .field("count", Int.self),
-          .field("cursor", JSON?.self),
+          .field("cursor", BoosterSchema.JSON?.self),
         ] }
 
         public var items: [Item] { __data["items"] }
         public var count: Int { __data["count"] }
-        public var cursor: JSON? { __data["cursor"] }
+        public var cursor: BoosterSchema.JSON? { __data["cursor"] }
 
         /// ListTopicReadModels.Item
         ///
@@ -88,26 +88,26 @@ public extension BoosterSchema {
           public let __data: DataDict
           public init(data: DataDict) { __data = data }
 
-          public static var __parentType: ParentType { BoosterSchema.Objects.TopicReadModel }
-          public static var __selections: [Selection] { [
-            .field("id", ID.self),
+          public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.TopicReadModel }
+          public static var __selections: [ApolloAPI.Selection] { [
+            .field("id", BoosterSchema.ID.self),
             .field("title", String.self),
             .field("createdAt", Double.self),
             .field("expiredAt", Double.self),
-            .field("status", GraphQLEnum<TopicStatus>.self),
-            .field("hostID", ID.self),
+            .field("status", GraphQLEnum<BoosterSchema.TopicStatus>.self),
+            .field("hostID", BoosterSchema.ID.self),
             .field("questionsCount", Double.self),
-            .field("participantIDs", [ID].self),
+            .field("participantIDs", [BoosterSchema.ID].self),
           ] }
 
-          public var id: ID { __data["id"] }
+          public var id: BoosterSchema.ID { __data["id"] }
           public var title: String { __data["title"] }
           public var createdAt: Double { __data["createdAt"] }
           public var expiredAt: Double { __data["expiredAt"] }
-          public var status: GraphQLEnum<TopicStatus> { __data["status"] }
-          public var hostID: ID { __data["hostID"] }
+          public var status: GraphQLEnum<BoosterSchema.TopicStatus> { __data["status"] }
+          public var hostID: BoosterSchema.ID { __data["hostID"] }
           public var questionsCount: Double { __data["questionsCount"] }
-          public var participantIDs: [ID] { __data["participantIDs"] }
+          public var participantIDs: [BoosterSchema.ID] { __data["participantIDs"] }
         }
       }
     }

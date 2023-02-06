@@ -8,11 +8,11 @@ public extension BoosterSchema {
     public static let operationName: String = "BlockUser"
     public static let document: ApolloAPI.DocumentType = .notPersisted(
       definition: .init(
-        """
+        #"""
         mutation BlockUser($userId: ID!) {
           BlockUser(input: {userID: $userId})
         }
-        """
+        """#
       ))
 
     public var userId: ID
@@ -27,8 +27,8 @@ public extension BoosterSchema {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
-      public static var __parentType: ParentType { BoosterSchema.Objects.Mutation }
-      public static var __selections: [Selection] { [
+      public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.Mutation }
+      public static var __selections: [ApolloAPI.Selection] { [
         .field("BlockUser", Bool.self, arguments: ["input": ["userID": .variable("userId")]]),
       ] }
 

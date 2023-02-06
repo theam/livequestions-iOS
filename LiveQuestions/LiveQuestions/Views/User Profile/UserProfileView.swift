@@ -1,37 +1,32 @@
 import SwiftUI
+import PhotosUI
 
 struct UserProfileView: View {
-    @EnvironmentObject private var userManager: UserManager
-    @EnvironmentObject private var topicsManager: TopicsManager
     @Environment(\.presentationMode) private var presentationMode
 
+    @StateObject var viewModel: UserProfileVM
     @State private var username = String.empty
     @State private var displayName = String.empty
-    @State private var contentState = ContentState.idle
     @State private var isShowingDeleteAccountAlert = false
+    
+    private var user: User { viewModel.user }
+    private var navigationTitle: String { viewModel.isPickingUsernameNeeded ? "Welcome! 🥳" : "@" + user.username }
 
-    private var user: User { userManager.user }
-
-    private var navigationTitle: String {
-        userManager.isPickingUsernameNeeded ? "Welcome! 🥳" : "@" + user.username
+    init(topicsManager: TopicsManager, userManager: UserManager) {
+        _viewModel = StateObject(wrappedValue: .init(topicsManager: topicsManager, userManager: userManager))
     }
-
+    
     var body: some View {
         NavigationView {
-            ContainerView(state: $contentState) {
+            ContainerView(state: $viewModel.contentState) {
                 ZStack {
                     Color.black.edgesIgnoringSafeArea(.all)
 
                     VStack {
-                        Image(systemName: "person")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(minWidth: 30, maxWidth: 60, minHeight: 30, maxHeight: 60)
-                            .padding(30)
-                            .background(Circle().strokeBorder(.white, lineWidth: 2))
-                            .padding(.bottom, 40)
-
-                        if userManager.isPickingUsernameNeeded {
+                        EditableCircularProfileImage(viewModel: viewModel)
+                            .padding()
+                            
+                        if viewModel.isPickingUsernameNeeded {
                             TextField("Username", text: $username)
                                 .textFieldStyle(RoundedTextFieldStyle())
                                 .padding(.top, 10)
@@ -46,7 +41,7 @@ struct UserProfileView: View {
                             .textFieldStyle(RoundedTextFieldStyle())
                             .padding(.top, 10)
 
-                        if userManager.isPickingUsernameNeeded {
+                        if viewModel.isPickingUsernameNeeded {
                             Text("You can change your display name whenever you want.")
                                 .font(.caption)
                                 .foregroundColor(.gray)
@@ -56,7 +51,7 @@ struct UserProfileView: View {
                         Spacer()
 
                         Group {
-                            if userManager.isPickingUsernameNeeded {
+                            if viewModel.isPickingUsernameNeeded {
                                 Button(action: createUserAction) {
                                     Text("Save").frame(maxWidth: .infinity)
                                 }
@@ -75,7 +70,7 @@ struct UserProfileView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            if !userManager.isPickingUsernameNeeded {
+                            if !viewModel.isPickingUsernameNeeded {
                                 Button(action: { presentationMode.wrappedValue.dismiss() }) {
                                     Image(systemName: "xmark.circle.fill")
                                 }
@@ -95,15 +90,15 @@ struct UserProfileView: View {
                     username = user.username
                     displayName = user.displayName
                 }
-                .onReceive(userManager.$user) { user in
-                    guard !user.isAuthenticated else { return }
+                .onReceive(viewModel.$isAuthenticated) { isAuthenticated in
+                    guard !isAuthenticated else { return }
 
                     // Ugly fix to give the Auth0 webView some time to be dismissed first:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
-                .interactiveDismissDisabled(userManager.isPickingUsernameNeeded)
+                .interactiveDismissDisabled(viewModel.isPickingUsernameNeeded)
             }
             .alert("Are you sure you want to delete your account?",
                    isPresented: $isShowingDeleteAccountAlert,
@@ -120,58 +115,33 @@ struct UserProfileView: View {
             })
         }
     }
-
+    
+    //MARK: - Actions
     private func createUserAction() {
         Task {
-            do {
-                contentState = .loading
-                try await userManager.createUserAndSubscribe(username: username, displayName: displayName)
-                presentationMode.wrappedValue.dismiss()
-            } catch {
-                contentState = .didFail(error.localizedDescription)
-            }
+            guard await viewModel.createUser(username: username, displayName: displayName) else { return }
+            presentationMode.wrappedValue.dismiss()
         }
     }
 
     private func updateUserAction() {
         Task {
-            do {
-                contentState = .loading
-                try await userManager.updateUser(displayName: displayName)
-                presentationMode.wrappedValue.dismiss()
-            } catch {
-                contentState = .didFail(error.localizedDescription)
-            }
+            guard let success = try? await viewModel.updateName(displayName), success else { return }
+            presentationMode.wrappedValue.dismiss()
         }
     }
 
     private func signOutAction() {
-        Task {
-            do {
-                try await userManager.signOut()
-                topicsManager.reset()
-            } catch {
-                contentState = .didFail(error.localizedDescription)
-            }
-        }
+        Task { await viewModel.signOut() }
     }
 
     private func deleteUserAction() {
-        Task {
-            do {
-                contentState = .loading
-                try await userManager.deleteUser()
-                topicsManager.reset()
-                contentState = .idle
-            } catch {
-                contentState = .didFail(error.localizedDescription)
-            }
-        }
+        Task { await viewModel.deleteUser() }
     }
 }
 
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileView().environmentObject(UserManager())
+        UserProfileView(topicsManager: TopicsManager(userManager: .shared), userManager: .shared)
     }
 }

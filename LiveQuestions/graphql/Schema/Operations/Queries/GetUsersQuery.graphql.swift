@@ -8,7 +8,7 @@ public extension BoosterSchema {
     public static let operationName: String = "GetUsers"
     public static let document: ApolloAPI.DocumentType = .notPersisted(
       definition: .init(
-        """
+        #"""
         query GetUsers($ids: [ID!]!, $cursor: JSON) {
           ListUserReadModels(filter: {id: {in: $ids}}, afterCursor: $cursor) {
             __typename
@@ -22,7 +22,7 @@ public extension BoosterSchema {
             cursor
           }
         }
-        """
+        """#
       ))
 
     public var ids: [ID]
@@ -45,8 +45,8 @@ public extension BoosterSchema {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
-      public static var __parentType: ParentType { BoosterSchema.Objects.Query }
-      public static var __selections: [Selection] { [
+      public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.Query }
+      public static var __selections: [ApolloAPI.Selection] { [
         .field("ListUserReadModels", ListUserReadModels.self, arguments: [
           "filter": ["id": ["in": .variable("ids")]],
           "afterCursor": .variable("cursor")
@@ -62,16 +62,16 @@ public extension BoosterSchema {
         public let __data: DataDict
         public init(data: DataDict) { __data = data }
 
-        public static var __parentType: ParentType { BoosterSchema.Objects.UserReadModelConnection }
-        public static var __selections: [Selection] { [
+        public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.UserReadModelConnection }
+        public static var __selections: [ApolloAPI.Selection] { [
           .field("items", [Item].self),
           .field("count", Int.self),
-          .field("cursor", JSON?.self),
+          .field("cursor", BoosterSchema.JSON?.self),
         ] }
 
         public var items: [Item] { __data["items"] }
         public var count: Int { __data["count"] }
-        public var cursor: JSON? { __data["cursor"] }
+        public var cursor: BoosterSchema.JSON? { __data["cursor"] }
 
         /// ListUserReadModels.Item
         ///
@@ -80,14 +80,14 @@ public extension BoosterSchema {
           public let __data: DataDict
           public init(data: DataDict) { __data = data }
 
-          public static var __parentType: ParentType { BoosterSchema.Objects.UserReadModel }
-          public static var __selections: [Selection] { [
-            .field("id", ID.self),
+          public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.UserReadModel }
+          public static var __selections: [ApolloAPI.Selection] { [
+            .field("id", BoosterSchema.ID.self),
             .field("displayName", String.self),
             .field("username", String.self),
           ] }
 
-          public var id: ID { __data["id"] }
+          public var id: BoosterSchema.ID { __data["id"] }
           public var displayName: String { __data["displayName"] }
           public var username: String { __data["username"] }
         }

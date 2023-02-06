@@ -22,6 +22,12 @@ struct QRCodeView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 200)
+                Text("Share this QR code for others to join your topic!")
+                    .multilineTextAlignment(.center)
+                    .font(.body)
+                    .foregroundColor(.gray)
+                    .padding(.top)
+                    .frame(width: 230)
                 Spacer()
             }
             .padding()
