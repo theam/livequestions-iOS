@@ -6,6 +6,7 @@ enum FileError: Error {
     case presignPostFailure
     case presignGetFailure
     case deleteFileFailure
+    case listFilesFailure
 }
 
 extension URLRequest {

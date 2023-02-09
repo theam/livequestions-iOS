@@ -36,7 +36,7 @@ final class FileService {
     
     func removeProfilePicture() async throws {
         let mutation = BoosterSchema.DeleteProfilePictureMutation()
-        guard let success = try await networkClient.mutate(mutation: mutation)?.deleteProfilePicture, success else { throw FileError.deleteFileFailure }
+        guard let success = try await networkClient.mutate(mutation: mutation)?.deleteProfilePicture, success else { throw FileError.listFilesFailure }
     }
     
     // **** Working method, but not currently used (except for testing purposes) ****
