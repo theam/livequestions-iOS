@@ -8,11 +8,11 @@ public extension BoosterSchema {
     public static let operationName: String = "JoinTopic"
     public static let document: ApolloAPI.DocumentType = .notPersisted(
       definition: .init(
-        """
+        #"""
         mutation JoinTopic($id: ID!) {
           JoinTopic(input: {topicID: $id})
         }
-        """
+        """#
       ))
 
     public var id: ID
@@ -27,8 +27,8 @@ public extension BoosterSchema {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
-      public static var __parentType: ParentType { BoosterSchema.Objects.Mutation }
-      public static var __selections: [Selection] { [
+      public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.Mutation }
+      public static var __selections: [ApolloAPI.Selection] { [
         .field("JoinTopic", Bool.self, arguments: ["input": ["topicID": .variable("id")]]),
       ] }
 

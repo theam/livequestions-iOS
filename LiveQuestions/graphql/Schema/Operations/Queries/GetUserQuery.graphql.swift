@@ -8,7 +8,7 @@ public extension BoosterSchema {
     public static let operationName: String = "GetUser"
     public static let document: ApolloAPI.DocumentType = .notPersisted(
       definition: .init(
-        """
+        #"""
         query GetUser($id: ID!) {
           UserReadModel(id: $id) {
             __typename
@@ -19,7 +19,7 @@ public extension BoosterSchema {
             blockedQuestionIDs
           }
         }
-        """
+        """#
       ))
 
     public var id: ID
@@ -34,8 +34,8 @@ public extension BoosterSchema {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
-      public static var __parentType: ParentType { BoosterSchema.Objects.Query }
-      public static var __selections: [Selection] { [
+      public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.Query }
+      public static var __selections: [ApolloAPI.Selection] { [
         .field("UserReadModel", UserReadModel?.self, arguments: ["id": .variable("id")]),
       ] }
 
@@ -48,20 +48,20 @@ public extension BoosterSchema {
         public let __data: DataDict
         public init(data: DataDict) { __data = data }
 
-        public static var __parentType: ParentType { BoosterSchema.Objects.UserReadModel }
-        public static var __selections: [Selection] { [
-          .field("id", ID.self),
+        public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.UserReadModel }
+        public static var __selections: [ApolloAPI.Selection] { [
+          .field("id", BoosterSchema.ID.self),
           .field("displayName", String.self),
           .field("username", String.self),
-          .field("blockedUserIDs", [ID].self),
-          .field("blockedQuestionIDs", [ID].self),
+          .field("blockedUserIDs", [BoosterSchema.ID].self),
+          .field("blockedQuestionIDs", [BoosterSchema.ID].self),
         ] }
 
-        public var id: ID { __data["id"] }
+        public var id: BoosterSchema.ID { __data["id"] }
         public var displayName: String { __data["displayName"] }
         public var username: String { __data["username"] }
-        public var blockedUserIDs: [ID] { __data["blockedUserIDs"] }
-        public var blockedQuestionIDs: [ID] { __data["blockedQuestionIDs"] }
+        public var blockedUserIDs: [BoosterSchema.ID] { __data["blockedUserIDs"] }
+        public var blockedQuestionIDs: [BoosterSchema.ID] { __data["blockedQuestionIDs"] }
       }
     }
   }

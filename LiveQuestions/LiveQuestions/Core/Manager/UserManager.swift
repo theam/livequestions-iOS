@@ -27,6 +27,7 @@ final class UserManager: ObservableObject {
     var isPickingUsernameNeeded: Bool { isUserAuthenticated && user.username == .empty }
 
     private let networkClient: NetworkClient
+    private let fileService = FileService()
     private var subscriptionTask: Task<Void, Error>?
     private static let subscriptionRetryInSeconds: TimeInterval = 10
 
@@ -51,6 +52,8 @@ final class UserManager: ObservableObject {
 
     /// Delete user account and sign out
     func deleteUser() async throws {
+        try? await fileService.removeProfilePicture()
+        
         let mutation = BoosterSchema.DeleteUserMutation()
         try await networkClient.mutate(mutation: mutation)
         try await networkClient.authService.signOut()

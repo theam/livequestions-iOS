@@ -1,0 +1,6 @@
+mutation ProfilePictureUploadURL {
+    ProfilePictureUploadURL {
+        url
+        fields
+    }
+}

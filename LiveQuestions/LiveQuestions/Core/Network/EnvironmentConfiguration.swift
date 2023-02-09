@@ -4,6 +4,16 @@ enum EnvironmentConfiguration: String {
     case development
     case production
 
+    var httpURL: URL {
+        switch self {
+        case .development:
+            return URL(string: "https://<ADD YOUR DEV URL>.execute-api.eu-west-1.amazonaws.com/dev/")!
+        
+        case .production:
+            return URL(string: "https://<ADD YOUR PROD URL>.execute-api.eu-west-1.amazonaws.com/prod/")!
+        }
+    }
+    
     var apiBaseUrl: URL {
         switch self {
         case .development:

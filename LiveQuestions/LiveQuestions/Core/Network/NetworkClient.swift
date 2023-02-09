@@ -4,11 +4,13 @@ import Combine
 import Foundation
 import UIKit
 
-final class NetworkClient {
+final class NetworkClient: ObservableObject {
     /// Network client singleton
     static let shared = NetworkClient()
     /// Service response for authentication
     let authService = AuthService()
+    ///
+    @Published var isUserAuthorized = false
 
     private var cancellables: [AnyCancellable] = []
     private lazy var webSocketTransport = WebSocketTransport(websocket: WebSocket(request: URLRequest(url: AppEnvironment.config.websocketBaseUrl), protocol: .graphql_ws))
@@ -83,6 +85,7 @@ final class NetworkClient {
             .compactMap(\ .?.accessToken)
             .removeDuplicates()
             .sink { [weak self] accessToken in
+                self?.isUserAuthorized = accessToken.hasElements
                 self?.webSocketTransport.updateConnectingPayload(["Authorization": "Bearer \(accessToken)"])
             }
             .store(in: &cancellables)

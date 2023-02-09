@@ -5,7 +5,8 @@ struct ContentView: View {
     @EnvironmentObject var topicsManager: TopicsManager
 
     @State private var isShowingUserProfile = false
-
+    @StateObject private var cache = PhotosCache.shared
+    
     var body: some View {
         NavigationStack {
             TopicsView(topicsManager: topicsManager, userManager: userManager)
@@ -15,7 +16,13 @@ struct ContentView: View {
                             Button {
                                 isShowingUserProfile = true
                             } label: {
-                                Image(systemName: "person.crop.circle")
+                                Group {
+                                    if let photo = cache.profilePhoto(userId: userManager.user.id) {
+                                        CircularProfileImage(photo)
+                                    } else {
+                                        Image(systemName: "person.crop.circle")
+                                    }
+                                }.frame(width: 30, height: 30)
                             }
                         }
                     }
@@ -24,9 +31,7 @@ struct ContentView: View {
         .sheet(isPresented: $isShowingUserProfile) {
             isShowingUserProfile = false
         } content: {
-            UserProfileView()
-                .environmentObject(userManager)
-                .environmentObject(topicsManager)
+            UserProfileView(topicsManager: topicsManager, userManager: userManager)
         }
         .onReceive(userManager.$user.removeDuplicates()) { _ in
             guard userManager.isPickingUsernameNeeded else { return }

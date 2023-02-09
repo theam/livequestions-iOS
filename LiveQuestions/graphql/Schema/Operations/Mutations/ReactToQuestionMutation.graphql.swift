@@ -8,11 +8,11 @@ public extension BoosterSchema {
     public static let operationName: String = "ReactToQuestion"
     public static let document: ApolloAPI.DocumentType = .notPersisted(
       definition: .init(
-        """
+        #"""
         mutation ReactToQuestion($questionId: ID!, $like: Boolean!) {
           ReactToQuestion(input: {questionID: $questionId, like: $like})
         }
-        """
+        """#
       ))
 
     public var questionId: ID
@@ -35,8 +35,8 @@ public extension BoosterSchema {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
-      public static var __parentType: ParentType { BoosterSchema.Objects.Mutation }
-      public static var __selections: [Selection] { [
+      public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.Mutation }
+      public static var __selections: [ApolloAPI.Selection] { [
         .field("ReactToQuestion", Bool.self, arguments: ["input": [
           "questionID": .variable("questionId"),
           "like": .variable("like")

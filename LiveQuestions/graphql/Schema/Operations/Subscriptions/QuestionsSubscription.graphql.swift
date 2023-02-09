@@ -8,7 +8,7 @@ public extension BoosterSchema {
     public static let operationName: String = "QuestionsSubscription"
     public static let document: ApolloAPI.DocumentType = .notPersisted(
       definition: .init(
-        """
+        #"""
         subscription QuestionsSubscription($topicId: ID!) {
           QuestionReadModels(filter: {topicID: {eq: $topicId}}) {
             __typename
@@ -21,7 +21,7 @@ public extension BoosterSchema {
             likes
           }
         }
-        """
+        """#
       ))
 
     public var topicId: ID
@@ -36,8 +36,8 @@ public extension BoosterSchema {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
-      public static var __parentType: ParentType { BoosterSchema.Objects.Subscription }
-      public static var __selections: [Selection] { [
+      public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.Subscription }
+      public static var __selections: [ApolloAPI.Selection] { [
         .field("QuestionReadModels", QuestionReadModels?.self, arguments: ["filter": ["topicID": ["eq": .variable("topicId")]]]),
       ] }
 
@@ -50,24 +50,24 @@ public extension BoosterSchema {
         public let __data: DataDict
         public init(data: DataDict) { __data = data }
 
-        public static var __parentType: ParentType { BoosterSchema.Objects.QuestionReadModel }
-        public static var __selections: [Selection] { [
-          .field("id", ID.self),
+        public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.QuestionReadModel }
+        public static var __selections: [ApolloAPI.Selection] { [
+          .field("id", BoosterSchema.ID.self),
           .field("text", String.self),
-          .field("status", GraphQLEnum<QuestionStatus>.self),
-          .field("creatorID", ID.self),
+          .field("status", GraphQLEnum<BoosterSchema.QuestionStatus>.self),
+          .field("creatorID", BoosterSchema.ID.self),
           .field("isAnonymous", Bool.self),
           .field("createdAt", Double.self),
-          .field("likes", [ID].self),
+          .field("likes", [BoosterSchema.ID].self),
         ] }
 
-        public var id: ID { __data["id"] }
+        public var id: BoosterSchema.ID { __data["id"] }
         public var text: String { __data["text"] }
-        public var status: GraphQLEnum<QuestionStatus> { __data["status"] }
-        public var creatorID: ID { __data["creatorID"] }
+        public var status: GraphQLEnum<BoosterSchema.QuestionStatus> { __data["status"] }
+        public var creatorID: BoosterSchema.ID { __data["creatorID"] }
         public var isAnonymous: Bool { __data["isAnonymous"] }
         public var createdAt: Double { __data["createdAt"] }
-        public var likes: [ID] { __data["likes"] }
+        public var likes: [BoosterSchema.ID] { __data["likes"] }
       }
     }
   }

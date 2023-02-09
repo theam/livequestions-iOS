@@ -8,13 +8,13 @@ public extension BoosterSchema {
     public static let operationName: String = "CreateQuestion"
     public static let document: ApolloAPI.DocumentType = .notPersisted(
       definition: .init(
-        """
+        #"""
         mutation CreateQuestion($topicId: ID!, $question: String!, $isAnonymous: Boolean!) {
           CreateQuestion(
             input: {topicID: $topicId, question: $question, isAnonymous: $isAnonymous}
           )
         }
-        """
+        """#
       ))
 
     public var topicId: ID
@@ -41,16 +41,16 @@ public extension BoosterSchema {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
-      public static var __parentType: ParentType { BoosterSchema.Objects.Mutation }
-      public static var __selections: [Selection] { [
-        .field("CreateQuestion", ID.self, arguments: ["input": [
+      public static var __parentType: ApolloAPI.ParentType { BoosterSchema.Objects.Mutation }
+      public static var __selections: [ApolloAPI.Selection] { [
+        .field("CreateQuestion", BoosterSchema.ID.self, arguments: ["input": [
           "topicID": .variable("topicId"),
           "question": .variable("question"),
           "isAnonymous": .variable("isAnonymous")
         ]]),
       ] }
 
-      public var createQuestion: ID { __data["CreateQuestion"] }
+      public var createQuestion: BoosterSchema.ID { __data["CreateQuestion"] }
     }
   }
 

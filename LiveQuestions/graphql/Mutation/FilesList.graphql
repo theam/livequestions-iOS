@@ -1,0 +1,7 @@
+mutation FilesList {
+  FilesList {
+    name
+    properties
+    metadata
+  }
+}
