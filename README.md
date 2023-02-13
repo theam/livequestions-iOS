@@ -64,6 +64,7 @@ In this application, we utilized **SwiftUI** to create the user interface, **Aut
 
 [Scalable Low-Code backends with Booster](https://medium.com/@juanSagasti/scalable-low-code-backends-with-booster-a32b9386dd27)
 
+[Cloud File Management with Booster](https://medium.com/the-theam-journey/cloud-file-management-with-booster-cf54c6b83ee2)
 
 
 ## License
